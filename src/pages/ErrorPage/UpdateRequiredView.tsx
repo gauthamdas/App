@@ -12,6 +12,7 @@ import useStyleUtils from '@hooks/useStyleUtils';
 import useThemeStyles from '@hooks/useThemeStyles';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import * as AppUpdate from '@libs/actions/AppUpdate';
+import latestChangesText from './latestChangesText';
 
 function UpdateRequiredView() {
     const insets = useSafeAreaInsets();
@@ -40,7 +41,7 @@ function UpdateRequiredView() {
                             <Text style={[styles.newKansasLarge, styles.textAlignCenter]}>{translate('updateRequiredView.pleaseInstall')}</Text>
                         </View>
                         <View style={styles.mb5}>
-                            <Text style={[styles.textAlignCenter, styles.textSupporting]}>{translate('updateRequiredView.toGetLatestChanges')}</Text>
+                            <Text style={[styles.textAlignCenter, styles.textSupporting]}>{translate(latestChangesText)}</Text>
                         </View>
                     </View>
                 </View>

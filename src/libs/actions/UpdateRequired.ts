@@ -1,5 +1,5 @@
+import Config from 'react-native-config';
 import Onyx from 'react-native-onyx';
-import getEnvironment from '@libs/Environment/getEnvironment';
 import CONST from '@src/CONST';
 import ONYXKEYS from '@src/ONYXKEYS';
 
@@ -7,13 +7,11 @@ function alertUser() {
     // For now, we will pretty much never have to do this on a platform other than production.
     // We should only update the minimum app version in the API after all platforms of a new version have been deployed to PRODUCTION.
     // As staging is always ahead of production there is no reason to "force update" those apps.
-    getEnvironment().then((environment) => {
-        if (environment !== CONST.ENVIRONMENT.PRODUCTION) {
-            return;
-        }
+    if ((Config?.ENVIRONMENT ?? CONST.ENVIRONMENT.DEV) !== CONST.ENVIRONMENT.PRODUCTION) {
+        return;
+    }
 
-        Onyx.set(ONYXKEYS.UPDATE_REQUIRED, true);
-    });
+    Onyx.set(ONYXKEYS.UPDATE_REQUIRED, true);
 }
 
 export {
