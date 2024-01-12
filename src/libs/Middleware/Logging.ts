@@ -1,8 +1,8 @@
 import Log from '@libs/Log';
+import * as UpdateRequired from '@userActions/UpdateRequired';
 import CONST from '@src/CONST';
 import type Request from '@src/types/onyx/Request';
 import type Response from '@src/types/onyx/Response';
-import * as UpdateRequired from '@userActions/UpdateRequired';
 import type Middleware from './types';
 
 function logRequestDetails(message: string, request: Request, response?: Response | void) {
@@ -102,7 +102,7 @@ const Logging: Middleware = (response, request) => {
             } else if (error.message === CONST.ERROR.DUPLICATE_RECORD) {
                 // Duplicate records can happen when a large upload is interrupted and we need to retry to see if the original request completed
                 Log.info('[Network] API request error: A record already exists with this ID', false, logParams);
-            } if (error.status === CONST.JSON_CODE.UPDATE_REQUIRED.toString()) {
+            } else if (error.status === CONST.JSON_CODE.UPDATE_REQUIRED.toString()) {
                 UpdateRequired.alertUser();
             } else {
                 // If we get any error that is not known log an alert so we can learn more about it and document it here.
